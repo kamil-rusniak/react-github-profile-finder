@@ -1,0 +1,17 @@
+.alert{
+    display: block;
+}
+.alert-success{
+    color: rgb(0, 255, 0);
+}
+
+
+.alert-fail{
+    color: rgb(255, 0, 0);
+}
+
+.alert-light{
+    color: rgb(91, 133, 199);
+}
+
+

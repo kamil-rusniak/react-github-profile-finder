@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #eeeeee;
+
+  background-image: url(/src/background.svg);
+  background-attachment: fixed;
+  background-size: 80% 80%;
+  background-position-x: center;
+  background-position-y: bottom;
+  background-repeat: no-repeat;
+}
