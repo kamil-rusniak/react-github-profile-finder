@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar';
@@ -9,16 +9,15 @@ import Alert from './components/layout/Alert';
 import About from './components/pages/About';
 import axios from 'axios';
 
-class App extends Component {
-  state = {
-    users: [],
-    user: {},
-    loading: false,
-    alert: null,
-  };
+const App = () => {
 
-  searchUsers = async (text) => {
-    this.setState({ loading: true });
+  const [user, setUser] = useState({});
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState(null);
+
+const searchUsers = async (text) => {
+    setLoading(true);
 
     const res = await axios.get(
       `https://api.github.com/search/users?q=${text}`,
@@ -29,11 +28,12 @@ class App extends Component {
       }
     );
 
-    this.setState({ users: res.data.items, loading: false });
+    setUsers(res.data.items);
+    setLoading(false);
   };
 
-  getSingleUser = async (username) => {
-    this.setState({ loading: true });
+  const getSingleUser = async (username) => {
+    setLoading(true)
 
     const res = await axios.get(
       `https://api.github.com/users/${username}`,
@@ -44,27 +44,28 @@ class App extends Component {
       }
     );
 
-    this.setState({ user: res.data, loading: false });
+    setUser(res.data);
+    setLoading(false);
   };
 
-  clearUsers = () => {
-    this.setState({ users: [], loading: false });
+  const clearUsers = () => {
+    setUsers([]);
+    setLoading(false);
   };
 
-  setAlert = (message, type) => {
-    this.setState({ alert: { message, type } });
+ const showAlert = (message, type) => {
+    setAlert(message, type)
 
-    setTimeout(() => this.setState({ alert: null }), 5000);
+    setTimeout(() => showAlert(null), 5000);
   };
 
-  render() {
-    const {users, user, loading } = this.state;
+
     return (
       <Router>
         <div className='App'>
           <Navbar title='Github Profile Finder' />
           <div className='mt-8 flex flex-col justify-center items-center w-full'>
-            <Alert alert={this.state.alert} />
+            <Alert alert={alert} />
             <Switch>
               <Route
                 exact
@@ -72,10 +73,10 @@ class App extends Component {
                 render={(props) => (
                   <Fragment>
                     <Search
-                      searchUsers={this.searchUsers}
-                      clearUsers={this.clearUsers}
+                      searchUsers={searchUsers}
+                      clearUsers={clearUsers}
                       showClearBtn={users.length > 0 ? true : false}
-                      setAlert={this.setAlert}
+                      setAlert={showAlert}
                     />
                     <Users loading={loading} users={users} />
                   </Fragment>
@@ -87,7 +88,7 @@ class App extends Component {
                 render={(props) => (
                   <User
                     {...props}
-                    getSingleUser={this.getSingleUser}
+                    getSingleUser={getSingleUser}
                     user={user}
                     loading={loading}
                   />
@@ -98,7 +99,6 @@ class App extends Component {
         </div>
       </Router>
     );
-  }
 }
 
 export default App;
