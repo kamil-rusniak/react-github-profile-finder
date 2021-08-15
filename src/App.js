@@ -2,12 +2,13 @@ import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/layout/Navbar';
+import Search from './components/users/Search';
+import About from './components/pages/About';
 import Users from './components/users/Users';
 import User from './components/users/User';
-import Search from './components/users/Search';
 import Alert from './components/layout/Alert';
-import About from './components/pages/About';
 import axios from 'axios';
+import GithubState from './context/github/GithubState';
 
 const App = () => {
 
@@ -61,6 +62,7 @@ const searchUsers = async (text) => {
 
 
     return (
+     <GithubState>
       <Router>
         <div className='App'>
           <Navbar title='Github Profile Finder' />
@@ -98,6 +100,7 @@ const searchUsers = async (text) => {
           </div>
         </div>
       </Router>
+      </GithubState> 
     );
 }
 
