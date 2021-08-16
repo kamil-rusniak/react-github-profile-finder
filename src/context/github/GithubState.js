@@ -4,30 +4,55 @@ import githubContext from './githubContext';
 import githubReducer from './githubReducer';
 import { SET_LOADING, SEARCH_USERS, GET_USER, CLEAR_USERS } from '../types';
 
-const GithubState = props => {
-    const initialState = {
-        users: [],
-        user: {},
-        loading: false
-    }
+const GithubState = (props) => {
+  const initialState = {
+    users: [],
+    user: {},
+    loading: false,
+  };
 
-    const [state, dispatch] = useReducer(githubReducer, initialState);
+  const [state, dispatch] = useReducer(githubReducer, initialState);
 
-    // Search Users
+  // Search Users
+  const searchUsers = async (text) => {
+    setLoading();
 
-    // Get User
+    const res = await axios.get(
+      `https://api.github.com/search/users?q=${text}`,
+      {
+        headers: {
+          Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+        },
+      }
+    );
 
-    // Clear Users
+    dispatch({
+      type: SEARCH_USERS,
+      payload: res.data.items,
+    });
+  };
 
-    // Set Loading
+  // Get User
 
-    return <githubContext.Provider value={{
+  // Clear Users
+
+  // Set Loading
+  const setLoading = () => {
+    dispatch({ type: SET_LOADING });
+  };
+
+  return (
+    <githubContext.Provider
+      value={{
         users: state.users,
         user: state.user,
-        loading: state.loading
-    }}>
-        {props.children}
+        loading: state.loading,
+        searchUsers
+      }}
+    >
+      {props.children}
     </githubContext.Provider>
-}
+  );
+};
 
 export default GithubState;
