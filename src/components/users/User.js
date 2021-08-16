@@ -1,14 +1,22 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import GithubContext from '../../context/github/githubContext';
 
-const User = ({ user, loading, getSingleUser, match }) => {
+
+const User = ({ match }) => {
+const githubContext = useContext(GithubContext);
+
+  const {user, loading, getSingleUser } = githubContext;
+
   useEffect(() => {
     getSingleUser(match.params.login);
     // eslint-disable-next-line
   }, []); //empty brackets so it doesnt loop but run only once like componentDidMount()
   //  doing eslint-disable-next-line above because otherwise it gives warning: "React Hook useEffect has missing dependencies" (but adding dependencies in this case causes it to loop again))
+  
+  
+  
   const {
     name,
     avatar_url,
@@ -81,10 +89,5 @@ const User = ({ user, loading, getSingleUser, match }) => {
   );
 };
 
-User.propTypes = {
-  loading: PropTypes.bool,
-  user: PropTypes.object.isRequired,
-  getSingleUser: PropTypes.func.isRequired,
-};
 
 export default User;

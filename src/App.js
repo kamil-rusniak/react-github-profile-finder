@@ -7,48 +7,19 @@ import About from './components/pages/About';
 import Users from './components/users/Users';
 import User from './components/users/User';
 import Alert from './components/layout/Alert';
-import axios from 'axios';
 import GithubState from './context/github/GithubState';
 
 const App = () => {
-
-  const [user, setUser] = useState({});
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
-
-
-  const getSingleUser = async (username) => {
-    setLoading(true)
-
-    const res = await axios.get(
-      `https://api.github.com/users/${username}`,
-      {
-        headers: {
-          Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
-        },
-      }
-    );
-
-    setUser(res.data);
-    setLoading(false);
-  };
-
-  const clearUsers = () => {
-    setUsers([]);
-    setLoading(false);
-  };
-
- const showAlert = (message, type) => {
-    setAlert(message, type)
+  const showAlert = (message, type) => {
+    setAlert(message, type);
 
     setTimeout(() => showAlert(null), 5000);
   };
 
-
-    return (
-     <GithubState>
+  return (
+    <GithubState>
       <Router>
         <div className='App'>
           <Navbar title='Github Profile Finder' />
@@ -60,33 +31,19 @@ const App = () => {
                 path='/'
                 render={(props) => (
                   <Fragment>
-                    <Search
-                      clearUsers={clearUsers}
-                      showClearBtn={users.length > 0 ? true : false}
-                      setAlert={showAlert}
-                    />
-                    <Users loading={loading} users={users} />
+                    <Search setAlert={showAlert} />
+                    <Users />
                   </Fragment>
                 )}
               />
               <Route exact path='/about' component={About} />
-              <Route
-                exact path={`/user/:login`}
-                render={(props) => (
-                  <User
-                    {...props}
-                    getSingleUser={getSingleUser}
-                    user={user}
-                    loading={loading}
-                  />
-                )}
-              />
+              <Route exact path={`/user/:login`} component={User} />
             </Switch>
           </div>
         </div>
       </Router>
-      </GithubState> 
-    );
-}
+    </GithubState>
+  );
+};
 
 export default App;
