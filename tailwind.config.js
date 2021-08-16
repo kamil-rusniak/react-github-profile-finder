@@ -10,6 +10,12 @@ module.exports = {
         mydarkgray: '#787A91',
   
       },
+
+      backgroundImage: theme => ({
+        'normal': "url('/src/img/background.svg')",
+        'notfound': "url('/src/img/notfound.svg')",
+    }),
+     
     },
    
   },
