@@ -3,20 +3,17 @@ import Spinner from '../layout/Spinner';
 import { Link } from 'react-router-dom';
 import GithubContext from '../../context/github/githubContext';
 
-
 const User = ({ match }) => {
-const githubContext = useContext(GithubContext);
+  const githubContext = useContext(GithubContext);
 
-  const {user, loading, getSingleUser } = githubContext;
+  const { user, loading, getSingleUser } = githubContext;
 
   useEffect(() => {
     getSingleUser(match.params.login);
     // eslint-disable-next-line
   }, []); //empty brackets so it doesnt loop but run only once like componentDidMount()
   //  doing eslint-disable-next-line above because otherwise it gives warning: "React Hook useEffect has missing dependencies" (but adding dependencies in this case causes it to loop again))
-  
-  
-  
+
   const {
     name,
     avatar_url,
@@ -80,6 +77,8 @@ const githubContext = useContext(GithubContext);
 
         <a
           href={html_url}
+          target='_blank'
+          rel='noreferrer'
           className='border-2 border-black bg-mydarkblue text-white text-center m-auto mb-4 px-2 py-2 w-3/12 cursor-pointer'
         >
           Github Profile
@@ -88,6 +87,5 @@ const githubContext = useContext(GithubContext);
     </Fragment>
   );
 };
-
 
 export default User;
