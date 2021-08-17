@@ -49,18 +49,18 @@ const User = ({ match }) => {
 
           <div className='w-6/12 mx-2 sm:mx-0'>
             <p className='font-bold text-lg mb-2'>Bio</p>
-            <p className='text-sm sm:text-md'>{bio}</p>
+            <p className='text-sm sm:text-base'>{bio}</p>
           </div>
         </div>
 
         <div className='my-8 flex items-center justify-around'>
-          <div className='w-6/12 text-center mx-2 sm:mx-0 text-sm sm:text-md'>
+          <div className='w-6/12 text-center mx-2 sm:mx-0 text-sm sm:text-base'>
             <p>Followers: {followers}</p>
             <p className='my-4'>Following: {following}</p>
             <p>Location: {location}</p>
           </div>
 
-          <div className='w-6/12 text-sm sm:text-md mx-2 sm:mx-0'>
+          <div className='w-6/12 text-sm sm:text-base mx-2 sm:mx-0'>
             <p>
               <strong>Username:</strong> {login}
             </p>
