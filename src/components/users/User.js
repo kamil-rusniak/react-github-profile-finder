@@ -24,7 +24,7 @@ const User = ({ match }) => {
     followers,
     following,
     location,
-    email,
+    public_repos,
   } = user;
 
   if (loading) {
@@ -57,20 +57,21 @@ const User = ({ match }) => {
           <div className='w-6/12 text-center mx-2 sm:mx-0 text-sm sm:text-base'>
             <p>Followers: {followers}</p>
             <p className='my-4'>Following: {following}</p>
-            <p>Location: {location}</p>
+            <p>Public repos: {public_repos}</p>
           </div>
 
           <div className='w-6/12 text-sm sm:text-base mx-2 sm:mx-0'>
             <p>
-              <strong>Username:</strong> {login}
+              <strong>Username: </strong>
+              {login}
             </p>
             <p className='my-4'>
               <strong>Website: </strong>
               {blog}
             </p>
             <p>
-              <strong>Email: </strong>
-              {email}
+              <strong>Location: </strong>
+              {location}
             </p>
           </div>
         </div>
