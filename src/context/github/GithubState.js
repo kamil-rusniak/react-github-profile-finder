@@ -4,7 +4,13 @@ import githubContext from './githubContext';
 import githubReducer from './githubReducer';
 import { SET_LOADING, SEARCH_USERS, GET_USER, CLEAR_USERS } from '../types';
 
-let githubToken = process.env.REACT_APP_GITHUB_TOKEN;
+let githubToken;
+
+if (process.env.NODE_ENV !== 'production') {
+  githubToken = process.env.REACT_APP_GITHUB_TOKEN;
+} else {
+  githubToken = process.env.GITHUB_TOKEN;
+}
 
 const GithubState = (props) => {
   const initialState = {
