@@ -25,8 +25,14 @@ body {
   background-color: #eeeeee;
   background-image: url('/src/img/background.svg');
   background-attachment: fixed;
-  background-size: 80% 80%;
+  background-size: 100% 80%;
   background-position-x: center;
   background-position-y: bottom;
   background-repeat: no-repeat;
+}
+
+@media (min-width: 640px) {
+  body {
+    background-size: 80% 80%;
+  }
 }

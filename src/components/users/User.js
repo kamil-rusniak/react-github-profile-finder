@@ -35,32 +35,32 @@ const User = ({ match }) => {
     <Fragment>
       <Link
         to='/'
-        className='bg-mydarkgray text-center text-black text-lg font-medium mt-6 py-2 w-3/12 cursor-pointer'
+        className='bg-mydarkgray text-center text-black text-lg font-medium mt-6 px-2 py-2 w-3/12 cursor-pointer'
       >
         Back to search
       </Link>
 
-      <div className='bg-white mt-8 w-9/12 flex flex-col'>
-        <div className='my-4 mx-2 flex items-center justify-around'>
-          <div className=' flex flex-col text-center items-center justify-center w-6/12'>
+      <div className='bg-white mt-8 w-12/12 sm:w-9/12 flex flex-col'>
+        <div className='my-4 sm:mx-2 flex items-center justify-around'>
+          <div className=' flex flex-col mx-2 sm:mx-0 text-center items-center justify-center w-6/12'>
             <img className='rounded-full w-32 mb-1' src={avatar_url} alt='' />
             <p>{name}</p>
           </div>
 
-          <div className='w-6/12'>
+          <div className='w-6/12 mx-2 sm:mx-0'>
             <p className='font-bold text-lg mb-2'>Bio</p>
-            <p>{bio}</p>
+            <p className='text-sm sm:text-md'>{bio}</p>
           </div>
         </div>
 
         <div className='my-8 flex items-center justify-around'>
-          <div className='w-6/12 text-center'>
+          <div className='w-6/12 text-center mx-2 sm:mx-0 text-sm sm:text-md'>
             <p>Followers: {followers}</p>
             <p className='my-4'>Following: {following}</p>
             <p>Location: {location}</p>
           </div>
 
-          <div className='w-6/12'>
+          <div className='w-6/12 text-sm sm:text-md mx-2 sm:mx-0'>
             <p>
               <strong>Username:</strong> {login}
             </p>

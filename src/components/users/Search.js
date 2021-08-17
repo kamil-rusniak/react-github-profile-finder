@@ -32,14 +32,14 @@ const Search = () => {
           type='text'
           name='text'
           placeholder='Enter username'
-          className='border-2 border-black px-2 py-2 w-6/12'
+          className='border-2 border-black px-2 py-2 w-8/12 lg:w-6/12  '
           value={text}
           onChange={onChange}
         />
         <input
           type='submit'
           value='Search'
-          className='border-2 border-l-0 border-black bg-mydarkblue text-white px-2 py-2 w-1/12 cursor-pointer'
+          className='border-2 border-l-0 border-black bg-mydarkblue text-white px-2 py-2 w-3/12 lg:w-1/12  cursor-pointer'
         />
       </form>
       {githubContext.users.length > 0 && (
