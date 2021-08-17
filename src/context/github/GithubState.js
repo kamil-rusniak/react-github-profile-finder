@@ -11,9 +11,6 @@ const GithubState = (props) => {
     loading: false,
   };
 
-  let githubClientToken;
-  githubClientToken = process.env.REACT_APP_GITHUB_TOKEN;
-
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
   // Search Users
@@ -24,7 +21,7 @@ const GithubState = (props) => {
       `https://api.github.com/search/users?q=${text}`,
       {
         headers: {
-          Authorization: `token ${githubClientToken}`,
+          Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
         },
       }
     );
@@ -40,7 +37,7 @@ const GithubState = (props) => {
 
     const res = await axios.get(`https://api.github.com/users/${username}`, {
       headers: {
-        Authorization: `token ${githubClientToken}`,
+        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
       },
     });
 
