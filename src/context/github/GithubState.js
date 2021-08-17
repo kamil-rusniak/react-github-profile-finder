@@ -10,8 +10,13 @@ const GithubState = (props) => {
     user: {},
     loading: false,
   };
+  let githubToken;
 
-  let githubToken = process.env.REACT_APP_GITHUB_TOKEN;
+  if (process.env.NODE_ENV !== 'production') {
+    githubToken = process.env.REACT_APP_GITHUB_TOKEN;
+  } else {
+    githubToken = process.env.REACT_APP_GITHUB_TOKEN;
+  }
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
