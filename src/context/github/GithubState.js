@@ -4,20 +4,15 @@ import githubContext from './githubContext';
 import githubReducer from './githubReducer';
 import { SET_LOADING, SEARCH_USERS, GET_USER, CLEAR_USERS } from '../types';
 
-let githubClientToken;
-
-if (process.env.NODE_ENV !== 'production') {
-  githubClientToken = process.env.REACT_APP_GITHUB_TOKEN;
-} else {
-  githubClientToken = process.env.GITHUB_TOKEN;
-}
-
 const GithubState = (props) => {
   const initialState = {
     users: [],
     user: {},
     loading: false,
   };
+
+  let githubClientToken;
+  githubClientToken = process.env.REACT_APP_GITHUB_TOKEN;
 
   const [state, dispatch] = useReducer(githubReducer, initialState);
 
