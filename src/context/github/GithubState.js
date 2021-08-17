@@ -4,6 +4,14 @@ import githubContext from './githubContext';
 import githubReducer from './githubReducer';
 import { SET_LOADING, SEARCH_USERS, GET_USER, CLEAR_USERS } from '../types';
 
+let githubClientToken;
+
+if (process.env.NODE_ENV !== 'production') {
+  githubClientToken = process.env.REACT_APP_GITHUB_TOKEN;
+} else {
+  githubClientToken = process.env.GITHUB_TOKEN;
+}
+
 const GithubState = (props) => {
   const initialState = {
     users: [],
@@ -21,7 +29,7 @@ const GithubState = (props) => {
       `https://api.github.com/search/users?q=${text}`,
       {
         headers: {
-          Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+          Authorization: `token ${githubClientToken}`,
         },
       }
     );
@@ -37,7 +45,7 @@ const GithubState = (props) => {
 
     const res = await axios.get(`https://api.github.com/users/${username}`, {
       headers: {
-        Authorization: `token ${process.env.REACT_APP_GITHUB_TOKEN}`,
+        Authorization: `token ${githubClientToken}`,
       },
     });
 
